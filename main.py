@@ -37,23 +37,23 @@ class ContactBookApp:
         
         # Estilo para el botón principal (Agregar)
         style.configure('Success.TButton', 
-                        font=('Inter', 11, 'bold'), 
-                        background=COLOR_SUCCESS, 
-                        foreground='white',
-                        padding=[10, 8])
+          font=('Inter', 11, 'bold'), 
+          background=COLOR_SUCCESS, 
+          foreground='white',
+          padding=[10, 8])
         style.map('Success.TButton', 
-                  background=[('active', '#5CB85C')],
-                  foreground=[('active', 'white')])
+          background=[('active', '#5CB85C')],
+          foreground=[('active', 'white')])
 
         # Estilo para los botones secundarios (Buscar, Eliminar, Editar)
         style.configure('Secondary.TButton', 
-                        font=('Inter', 10), 
-                        background='#607D8B', # Gris azulado
-                        foreground='white',
-                        padding=[8, 5])
+          font=('Inter', 10), 
+          background='#607D8B', # Gris azulado
+          foreground='white',
+          padding=[8, 5])
         style.map('Secondary.TButton', 
-                  background=[('active', '#78909C')],
-                  foreground=[('active', 'white')])
+          background=[('active', '#78909C')],
+          foreground=[('active', 'white')])
         
         self.contacts = {} # Diccionario {nombre: número} para almacenar en memoria
         self.contact_list_var = tk.StringVar()
@@ -80,8 +80,8 @@ class ContactBookApp:
         # Los desarrolladores futuros pueden modificar el diseño (grid) dentro de este frame
         # para funciones como Editar, Exportar, etc.
         control_frame = ttk.LabelFrame(parent, 
-                                       text="Gestión de Contactos (Agregar, Buscar, Eliminar, Editar)", 
-                                       padding="15 15 15 15")
+          text="Gestión de Contactos (Agregar, Buscar, Eliminar, Editar)", 
+          padding="15 15 15 15")
         control_frame.grid(row=row, column=0, pady=15, sticky="ew")
 
         # --- Seccion 1: Agregar Contacto ---
@@ -148,14 +148,14 @@ class ContactBookApp:
 
         # Usar un widget Text para mostrar, ya que maneja mejor el formato y el desplazamiento
         self.contact_display = tk.Text(display_frame, 
-                                       height=15, 
-                                       width=45, 
-                                       state=tk.DISABLED, 
-                                       font=('Consolas', 10), 
-                                       wrap=tk.WORD, 
-                                       borderwidth=2, 
-                                       relief="sunken", # Cambiado a sunken para un mejor contraste
-                                       bg='white')
+            height=15, 
+            width=45, 
+            state=tk.DISABLED, 
+            font=('Consolas', 10), 
+            wrap=tk.WORD, 
+            borderwidth=2, 
+            relief="sunken", # Cambiado a sunken para un mejor contraste
+            bg='white')
         self.contact_display.pack(padx=5, pady=5)
 
     def load_contacts(self):
