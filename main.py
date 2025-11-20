@@ -100,13 +100,53 @@ class ContactBookApp:
         
         ttk.Button(control_frame, text="2. Buscar", style='Secondary.TButton', command=self.search_contact).grid(row=5, column=0, padx=5, pady=5, sticky="w")
         
-        ttk.Button(control_frame, text="3. Eliminar Contacto (Pendiente)", style='Secondary.TButton', command=self.delete_contact_placeholder).grid(row=5, column=1, padx=5, pady=5, sticky="w")
+        ttk.Button(control_frame, 
+           text="3. Eliminar Contacto",
+           style='Secondary.TButton',
+           command=self.delete_contact).grid(row=5, column=1, padx=5, pady=5, sticky="w")
         
         ### --- UPDATE AGREGADO: botón editar REAL ---
         ttk.Button(control_frame, text="4. Editar Contacto", style='Secondary.TButton', command=self.edit_contact).grid(row=6, column=0, columnspan=2, padx=5, pady=5, sticky="ew")
 
-    def delete_contact_placeholder(self):
-        messagebox.showinfo("Funcionalidad Pendiente", "La función de eliminar contacto debe implementarse en la lógica del programa.")
+    def delete_contact(self):
+        """Elimina un contacto por nombre usando el campo de búsqueda."""
+        name_to_delete = self.search_entry.get().strip()
+    
+        if not name_to_delete:
+            messagebox.showerror("Error", "Debes escribir el nombre del contacto a eliminar.")
+            return
+    
+        # Verificar existencia
+        if name_to_delete not in self.contacts:
+            messagebox.showwarning("No encontrado", f"El contacto '{name_to_delete}' no existe.")
+            return
+    
+        # Confirmación
+        confirm = messagebox.askyesno(
+            "Confirmar Eliminación",
+            f"¿Deseas eliminar el contacto '{name_to_delete}'?"
+        )
+        if not confirm:
+            return
+    
+        # 1. Eliminar del diccionario
+        del self.contacts[name_to_delete]
+    
+        # 2. Reescribir el archivo completo
+        try:
+            with open(CONTACT_FILE, "w") as f:
+                for name, number in self.contacts.items():
+                    f.write(f"{name}{SEPARATOR}{number}\n")
+        except Exception as e:
+            messagebox.showerror("Error al Guardar", f"Hubo un error reescribiendo el archivo: {e}")
+            return
+    
+        # 3. Actualizar interfaz
+        self.update_display()
+    
+        # 4. Mensaje éxito
+        messagebox.showinfo("Éxito", f"Contacto '{name_to_delete}' eliminado exitosamente.")
+
         
     def edit_contact_placeholder(self):
         messagebox.showinfo("Funcionalidad Pendiente", "La función de editar/actualizar contacto debe implementarse en la lógica del programa.")
