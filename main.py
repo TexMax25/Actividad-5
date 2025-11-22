@@ -8,10 +8,7 @@ CONTACT_FILE = "friendsContact.txt" # Nombre del archivo para guardar los contac
 SEPARATOR = "!" # Separador usado en el archivo de texto
 
 class ContactBookApp:
-    """
-    Una aplicación simple de Gestor de Contactos Amigos usando Tkinter.
-    Gestiona contactos (nombre y número) almacenados en un archivo de texto.
-    """
+    
     def __init__(self, master):
         self.master = master
         master.title("Gestor de Contactos Python")
@@ -147,9 +144,6 @@ class ContactBookApp:
         # 4. Mensaje éxito
         messagebox.showinfo("Éxito", f"Contacto '{name_to_delete}' eliminado exitosamente.")
 
-        
-    def edit_contact_placeholder(self):
-        messagebox.showinfo("Funcionalidad Pendiente", "La función de editar/actualizar contacto debe implementarse en la lógica del programa.")
 
     def search_contact(self):
         query = self.search_entry.get().strip().lower()
